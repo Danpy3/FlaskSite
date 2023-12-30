@@ -14,10 +14,9 @@
 {% block content -%}
     {%- block mainmenu -%}
 <ul class="mainmenu">
-    <li><a href="{{url_for('index')}}">Главная</a></li>
-    <li><a href="{{url_for('addPost')}}">Добавить статью</a></li>
-    <li><a href="{{url_for('contact')}}">Обратная связь</a></li>
-    <li><a href="{{url_for('login')}}">Войти</a></li>
+    {% for l in menu %}
+    <li><a href="{{l.url}}"><label>{{ l.title }}</label></a> </li>
+    {% endfor %}
 </ul>
     {% endblock mainmenu -%}
 <div class="clear"></div>

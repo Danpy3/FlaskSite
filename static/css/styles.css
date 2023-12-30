@@ -86,3 +86,19 @@ ul.list-posts .annonce {
          margin: 0;
          padding: 10px 5px 10px 5px;
 }
+
+div.error401 {
+        font-family: 'Colibri';
+        font-size: 18px;
+        max-width: 1000px;
+}
+
+div.error401 a {
+        color: #0059b2;
+        text-decoration: none;
+}
+
+div.error401 a:hover {
+        color: #9B5294;
+        text-decoration: underline;
+}
