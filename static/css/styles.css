@@ -27,11 +27,13 @@ ul.mainmenu {
     color: #fdc073;
     font-size: 20px;
     overflow: hidden;
+    display: flex; /* Используем flex-контейнер */
+    justify-content: space-around; /* Равномерное распределение блоков по горизонтали */
 }
 
 ul.mainmenu li {
     float: left;
-    margin: 18px 40px 0 50px;
+    margin: 18px 0; /* Убираем лишние отступы влево и вправо */
 }
 
 ul.mainmenu li.last {float: right;}
