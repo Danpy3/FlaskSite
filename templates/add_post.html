@@ -6,10 +6,11 @@
 <div class="flash {{cat}}">{{msg}}</div>
 {% endfor %}
 <form action="{{url_for('addPost')}}" method="POST" class="form-contact">
-<p><label>Название статьи: </label> <input type="text" name="name" value="" requied />
-    <p><label>URL статьи: </label> <input type="text" name="url" value="" requied />
-<p><label>Текст статьи:</label>
-<p><textarea name="post" rows=7 cols=40></textarea>
+    {{ form.hidden_tag() }}
+    <p>{{ form.namePost.label() }} {{ form.namePost() }}
+    <p>{{ form.urlPost.label() }} {{ form.urlPost() }}
+    <p>{{ form.bodyPost.label() }}
+    <p>{{ form.bodyPost(rows='7', cols='40') }}
 <p><input type="submit" value="Добавить" />
 </form>
 {% endblock %}
