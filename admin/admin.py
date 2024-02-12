@@ -1,6 +1,8 @@
 import sqlite3
 
 from flask import Blueprint, render_template, url_for, redirect, request, flash, session, g
+from .admin_forms import addPostForm
+from .adminFDataBase import AdminFDataBase
 
 admin = Blueprint('admin', __name__, template_folder='templates', static_folder='static')
 
@@ -18,9 +20,11 @@ def logout_admin():
 
 
 menu = [{'url': '.index', 'title': 'Панель'},
+        {'url': '.addPost', 'title': 'Добавить статью'},
         {'url': '.listpubs', 'title': 'Список статей'},
         {'url': '.listusers', 'title': 'Список пользователей'},
-        {'url': '.logout', 'title': 'Выйти'}]
+        {'url': '.logout', 'title': 'Выйти'},
+        ]
 
 db = None
 
@@ -69,6 +73,24 @@ def logout():
     logout_admin()
 
     return redirect(url_for('.login'))
+
+
+@admin.route("/add_post", methods=['POST', 'GET'])
+def addPost():
+    if not isLogged():
+        return redirect(url_for('.login'))
+
+    form = addPostForm()
+
+    if db:
+        if form.validate_on_submit():
+            res = AdminFDataBase(db).addPost(form.namePost.data, form.bodyPost.data, form.urlPost.data)
+            if res:
+                flash("Статья добавлеDDDDна", category='success')
+            else:
+                flash("Ошибка добавления", category= 'error')
+
+    return render_template('admin/add_post.html', title='Добавление статьи', menu=menu, form=form)
 
 
 @admin.route('/list-pubs')

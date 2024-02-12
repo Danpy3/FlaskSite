@@ -20,7 +20,7 @@ a:hover {
 
 ul.mainmenu {
     list-style: none;
-    background: #3F4137;
+    background: #55D5C3;
     height: 60px;
     margin: 0;
     padding: 0;
@@ -28,24 +28,26 @@ ul.mainmenu {
     font-size: 20px;
     overflow: hidden;
     display: flex; /* Используем flex-контейнер */
-    justify-content: space-around; /* Равномерное распределение блоков по горизонтали */
+    justify-content: center; /* Выравнивание по горизонтали по центру */
 }
 
 ul.mainmenu li {
+    margin-right: 40px;
     float: left;
-    margin: 18px 0; /* Убираем лишние отступы влево и вправо */
+    margin-top: 18px; /* Убираем лишний отступ сверху */
+    margin-bottom: 18px; /* Убираем лишний отступ снизу */
 }
 
-ul.mainmenu li.last {float: right;}
-
 ul.mainmenu li a {
-    color: #fdc073;
+    color: #FFFFFF;
+    font-weight: bold;
     text-decoration: none;
 }
 
 ul.mainmenu li a:hover {
-    color: #FDA83D;
+    color: #318382;
 }
+
 
 div.content {
     margin: 10px;
@@ -77,25 +79,6 @@ div.content {
 .flash.error {
     border: 1px solid #FF4343;
     background: #FF9C9C;
-}
-ul.list-posts {
-         list-style: none;
-         margin: 0;
-         padding: 0;
-         max-width: 600px;
-}
-ul.list-posts li {
-         margin: 20px 0 0 0;
-         border: 1px solid #eee;
-}
-ul.list-posts .title {
-         margin: 0;
-         padding: 5px;
-         background: #eee;
-}
-ul.list-posts .annonce {
-         margin: 0;
-         padding: 10px 5px 10px 5px;
 }
 
 div.error401 {

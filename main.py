@@ -1,11 +1,12 @@
 import sqlite3
+from flask_sqlalchemy import SQLAlchemy
 import os
 from flask import Flask, render_template, request, flash, session, redirect, url_for, abort, g, make_response
 from FDataBase import FDataBase
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 from UserLogin import UserLogin
-from forms import LoginForm, addPostForm, RegisterForm
+from forms import LoginForm, RegisterForm
 from admin.admin import admin
 
 # config
@@ -19,7 +20,7 @@ app.config.from_object(__name__)  # инициализация конфигур�
 # переопределим путь к базе данных
 app.config.update(dict(DATABASE=os.path.join(app.root_path, 'flsite.db')))
 
-app.register_blueprint(admin, url_prefix = '/admin')
+app.register_blueprint(admin, url_prefix='/admin')
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -78,21 +79,6 @@ def index():
     return render_template('index.html', menu=dbase.getMenu(), posts=dbase.getPostsAnnonce())
 
 
-@app.route("/add_post", methods=['POST', 'GET'])
-def addPost():
-
-    form = addPostForm()
-
-    if form.validate_on_submit():
-        res = dbase.addPost(form.namePost.data,form.bodyPost.data, form.urlPost.data)
-        if not res:
-            flash('Ошибка добавления статьи', category='error')
-        else:
-            flash('Статья добавлена успешно', category='success')
-
-    return render_template('add_post.html', menu=dbase.getMenu(), title='Добавление статьи', form=form)
-
-
 @app.route("/post/<alias>")
 @login_required
 def showPost(alias):
@@ -110,7 +96,7 @@ def contact():
             flash('Сообщение отправлено', category='success')
         else:
             flash('Ошибка отправки', category='error')
-    return render_template('contacts.html', title='Our contacts', menu=dbase.getMenu())
+    return render_template('contacts.html', title='Articles', menu=dbase.getMenu())
 
 
 @app.route("/login", methods=["POST", "GET"])

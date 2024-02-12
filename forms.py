@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 
 from wtforms.fields.simple import StringField, SubmitField, BooleanField, PasswordField
 from wtforms.validators import DataRequired, Email, Length, EqualTo
-from wtforms.widgets.core import TextArea
 
 
 class LoginForm(FlaskForm):
@@ -19,9 +18,3 @@ class RegisterForm(FlaskForm):
 
     psw2 = PasswordField("Повтор пароля: ", validators=[DataRequired(), EqualTo('psw', message="Пароли не совпадают")])
     submit = SubmitField("Регистрация")
-
-
-class addPostForm(FlaskForm):
-    namePost = StringField("Название статьи: ", validators=[DataRequired(), Length(min=5, max=20)])
-    urlPost = StringField("URL статьи: ", validators=[DataRequired()])
-    bodyPost = StringField('Tекст статьи :', widget=TextArea(), validators=[DataRequired(), Length(min=10, max=200)])

@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS mainmenu (
     url text NOT NULL
 );
 
+DROP TABLE posts;
+
 CREATE TABLE IF NOT EXISTS posts (
     id integer PRIMARY KEY AUTOINCREMENT,
     title text NOT NULL,
