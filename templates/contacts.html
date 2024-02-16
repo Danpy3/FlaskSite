@@ -1,15 +1,30 @@
 {% extends 'base.html' %}
- 
 {% block content %}
-{{ super() }}
-{% for cat, msg in get_flashed_messages(True) %}
-<div class="flash {{cat}}">{{msg}}</div>
-{% endfor %}
-<form action="/contact" method="POST" class="form-contact">
-<p><label>Имя: </label> <input type="text" name="username" value="" requied />
-    <p><label>Email: </label> <input type="text" name="email" value="" requied />
-<p><label>Сообщение:</label>
-<p><textarea name="message" rows=7 cols=40></textarea>
-<p><input type="submit" value="Отправить" />
-</form>
+    {{ super() }}
+    {% for cat, msg in get_flashed_messages(True) %}
+        <div class="flash {{cat}}">{{msg}}</div>
+    {% endfor %}
+    <div class="container">
+        <form action="/feedback" method="POST" class="form-contact">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.url.label(class="form-label") }}
+                {{ form.url(class="form-control", style="width: 28rem") }}
+            </div>
+            <div class="mb-3">
+                <p>{{ form.BodyMessage.label(class="form-label") }}</p>
+                {% if form.BodyMessage.errors %}
+                    {{ form.BodyMessage(class="invalid") }}
+                    <span class="invalid-feedback">
+                        {% for e in form.BodyMessage.errors %}
+                        {{ e }}
+                        {% endfor %}
+                    </span>
+                {% else %}
+                    {{ form.BodyMessage(class="form-control", rows="5", style="width: 28rem") }}
+                {% endif %}
+            </div>
+            <p>{{ form.submit(class="btn btn-primary") }}</p>
+        </form>
+    </div>
 {% endblock %}

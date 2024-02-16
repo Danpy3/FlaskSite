@@ -4,8 +4,6 @@ CREATE TABLE IF NOT EXISTS mainmenu (
     url text NOT NULL
 );
 
-DROP TABLE posts;
-
 CREATE TABLE IF NOT EXISTS posts (
     id integer PRIMARY KEY AUTOINCREMENT,
     title text NOT NULL,
@@ -23,3 +21,9 @@ CREATE TABLE IF NOT EXISTS users (
     time integer NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS messages_from_users (
+    id integer PRIMARY KEY AUTOINCREMENT,
+    name_user text NOT NULL,
+    url text,
+    message text NOT NULL
+);

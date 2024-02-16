@@ -1,68 +1,3 @@
-html, body {
-    font-family: 'Arial';
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-}
-
-a {
-    color: #0059b2;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #CC0000;
-    text-decoration: underline;
-}
-
-.clear {clear: both;}
-
-ul.mainmenu {
-    list-style: none;
-    background: #55D5C3;
-    height: 60px;
-    margin: 0;
-    padding: 0;
-    color: #fdc073;
-    font-size: 20px;
-    overflow: hidden;
-    display: flex; /* Используем flex-контейнер */
-    justify-content: center; /* Выравнивание по горизонтали по центру */
-}
-
-ul.mainmenu li {
-    margin-right: 40px;
-    float: left;
-    margin-top: 18px; /* Убираем лишний отступ сверху */
-    margin-bottom: 18px; /* Убираем лишний отступ снизу */
-}
-
-ul.mainmenu li a {
-    color: #FFFFFF;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-ul.mainmenu li a:hover {
-    color: #318382;
-}
-
-
-div.content {
-    margin: 10px;
-}
-
-.form-contact label {
-    display: inline-block;
-    min-width: 80px;
-}
-
-.form-contact p {margin: 10px 0 10px 0;}
-.form-contact input[type=submit], textarea {
-    font-size: 16px;
-}
-
 .form-contact .invalid {
     background: #FF9898;
 }
@@ -73,14 +8,15 @@ div.content {
 
 .flash {padding: 10px;}
 .flash.success {
+    margin-bottom: 10px;
     border: 1px solid #21DB56;
     background: #AEFFC5;
 }
 .flash.error {
+    margin-bottom: 10px;
     border: 1px solid #FF4343;
     background: #FF9C9C;
 }
-
 div.error401 {
         font-family: 'Colibri';
         font-size: 18px;
@@ -99,10 +35,9 @@ div.error401 a:hover {
 
 /*Стили для профайла*/
 .profile-ava {
-         width: 130px;
+         width: 160px;
          text-align: center;
          overflow: hidden;
-         background: #eee;
          padding: 10px;
 }
 

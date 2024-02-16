@@ -1,30 +1,33 @@
 {% extends 'base.html' %}
- 
-{% block content %}
-{{ super() }}
-{% for cat, msg in get_flashed_messages(True) %}
-<div class="flash {{cat}}">{{msg}}</div>
-{% endfor %}
-<form action="" method="post" class="form-contact">
-    {{ form.hidden_tag() }}
-
-    {% for field in form if field.name not in ['csrf_token', 'remember', 'submit'] -%}
-    <p>{{ field.label() }}
-    {% if field.errors %}
-    {{ field(class="invalid") }}
-    <span class="invalid-feedback">
-        {% for e in field.errors %}
-        {{ e }}
+ {% block content %}
+    {{ super() }}
+    <div class="container">
+        {% for cat, msg in get_flashed_messages(True) %}
+            <div class="flash {{cat}}" style="width: 28rem">{{msg}}</div>
         {% endfor %}
-    </span>
-    {% else %}
-    {{ field() }}
-    {% endif %}
-    {% endfor %}
+        <form action="" method="post" class="form-contact">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.name not in ['csrf_token', 'remember', 'submit'] -%}
+                <div class="mb-3">
+                    {{ field.label(class="form-label") }}
+                    {% if field.errors %}
+                        {{ field(class="invalid") }}
+                        <span class="invalid-feedback">
+                        {% for e in field.errors %}
+                            {{ e }}
+                        {% endfor %}
+                        </span>
+                    {% else %}
+                        {{ field(class="form-control", style="width: 28rem") }}
+                    {% endif %}
+                </div>
+            {% endfor %}
 
-    <p>{{ form.remember.label() }} {{ form.remember() }}
-    <p>{{ form.submit() }}
-<hr align=left width="300px">
-<p><a href="{{url_for('register')}}">Регистрация</a>
-</form>
+                <p>{{ form.remember.label() }} {{ form.remember() }}
+
+                <p>{{ form.submit() }}</p>
+        <hr align=left width="300px">
+        <p><a href="{{url_for('register')}}">Регистрация</a>
+        </form>
+    </div>
 {% endblock %}

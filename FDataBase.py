@@ -31,7 +31,7 @@ class FDataBase:
 
     def getPostsAnnonce(self):
         try:
-            self.__cur.execute(f"SELECT id, title, text, url FROM posts ORDER BY time DESC")
+            self.__cur.execute(f"SELECT id, title, url FROM posts ORDER BY time DESC")
             res = self.__cur.fetchall()
             if res:
                 return res

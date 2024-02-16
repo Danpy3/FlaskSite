@@ -6,7 +6,7 @@ from FDataBase import FDataBase
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 from UserLogin import UserLogin
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, FeedbackForm
 from admin.admin import admin
 
 # config
@@ -89,14 +89,13 @@ def showPost(alias):
     return render_template('post.html', title=title, menu=dbase.getMenu(), post=post)
 
 
-@app.route('/contact', methods=['POST', 'GET'])
-def contact():
-    if request.method == 'POST':
-        if len(request.form['username']) > 2:
-            flash('Сообщение отправлено', category='success')
-        else:
-            flash('Ошибка отправки', category='error')
-    return render_template('contacts.html', title='Articles', menu=dbase.getMenu())
+@app.route('/feedback', methods=['POST', 'GET'])
+@login_required
+def feedback():
+    form = FeedbackForm()
+    if form.validate_on_submit():
+        flash('Сообщение отправлено', category='success')
+    return render_template('contacts.html', title='Напишите нам', menu=dbase.getMenu(), form=form)
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -148,16 +147,6 @@ def profile():
     return render_template("profile.html", menu=dbase.getMenu(), title='Профиль')
 
 
-@app.errorhandler(404)
-def pageNotFount(error):
-    return render_template('page404.html', title="Страница не найдена")
-
-
-@app.errorhandler(401)
-def pageNotFount(error):
-    return render_template('page401.html', title="Страница не найдена")
-
-
 @app.route('/userava')
 @login_required
 def userava():
@@ -183,11 +172,27 @@ def upload():
                     flash('Ошибка обновления аватара', 'error')
                 flash('Аватар успешно обновлен', 'success')
             except FileNotFoundError as e:
-                flash("Ошибка чтения файла", "error")
+                flash("Ошибка чтения файла" + str(e), "error")
         else:
             flash("Ошибка обновления аватара", "error")
 
     return redirect(url_for('profile'))
+
+
+@app.route('/addBookmarks', methods=['POST', 'GET'])
+@login_required
+def addBookmarks():
+    pass
+
+
+@app.errorhandler(404)
+def pageNotFount(error):
+    return render_template('page404.html', title="Страница не найдена")
+
+
+@app.errorhandler(401)
+def pageNotFount(error):
+    return render_template('page401.html', title="Страница не найдена")
 
 
 if __name__ == "__main__":
